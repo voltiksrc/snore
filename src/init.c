@@ -32,10 +32,8 @@ InitSystem detect_init(void) {
     name[strcspn(name, "\n")] = '\0';
 
     if (strcmp(name, "systemd") == 0) {
-        puts("systemd detected..");
         return INIT_SYSTEMD; // return our init systemd enum
     } else if (strcmp(name, "runit") == 0) {
-        puts("runit detected..");
         return INIT_RUNIT;
     } else {
         return INIT_UNKNOWN;

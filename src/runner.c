@@ -3,27 +3,30 @@
  * SPDX-License-Identifier: ISC
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 
 #include "init.h"
-#include "runner.h"
+#include "process.h"
 
-int run_action(InitSystem init, PowerAction action) {
+int run_action(InitSystem init, PowerAction action, bool dry_run) {
+    const char *program = NULL;
+    const char *operation = NULL;
+
     if (init == INIT_SYSTEMD) {
+        program = "systemctl";
+
         switch (action) {
         case ACTION_SUSPEND:
-            puts("using systemctl suspend..");
-            run_action(init, action);
+            operation = "suspend";
             break;
 
         case ACTION_POWEROFF:
-            puts("using systemctl poweroff..");
-            run_action(init, action);
+            operation = "poweroff";
             break;
 
         case ACTION_REBOOT:
-            puts("using systemctl reboot..");
-            run_action(init, action);
+            operation = "reboot";
             break;
 
         default:
@@ -32,24 +35,32 @@ int run_action(InitSystem init, PowerAction action) {
     } else if (init == INIT_RUNIT) {
         switch (action) {
         case ACTION_SUSPEND:
-            puts("would use zzz");
-            run_action(init, action);
+            program = "zzz";
             break;
 
         case ACTION_POWEROFF:
-            puts("would use runit init 0");
-            run_action(init, action);
+            program = "init";
+            operation = "0";
             break;
 
         case ACTION_REBOOT:
-            puts("would use runit init 6");
-            run_action(init, action);
+            program = "init";
+            operation = "6";
             break;
 
         default:
             return 1;
         }
+    } else {
+        fprintf(stderr, "snore: unsupported init system\n");
+        return 1;
     }
 
-    return 0;
+    // Display the selected command without executing it.
+    if (dry_run) {
+        printf("Would execute: %s %s\n", program, operation ? operation : "");
+        return 0;
+    }
+
+    return run_command(program, args);
 }

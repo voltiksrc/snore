@@ -7,6 +7,5 @@
 #define PROCESS_H
 
 int run_command(const char *program, char *const args[]);
-void check_permissions(void);
 
 #endif

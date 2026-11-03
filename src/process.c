@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: ISC
  */
 
+#include <errno.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -31,6 +32,11 @@ int run_command(const char *program, char *const args[]) {
     if (waitpid(pid, &status, 0) == -1) {
         perror("waitpid");
         return 1;
+    }
+
+    // Check if waitpid got interrupted by a signal and rerun it if so
+    if (errno == EINTR) {
+        waitpid(pid, &status, 0);
     }
 
     if (WIFEXITED(status)) {

@@ -7,7 +7,8 @@
 #define RUNNER_H
 
 #include "init.h"
+#include <stdbool.h>
 
-int run_action(InitSystem init, PowerAction action);
+int run_action(InitSystem init, PowerAction action, bool dry_run);
 
 #endif
