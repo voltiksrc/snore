@@ -2,7 +2,7 @@
 /build/
 /ignore
 .cache/
-/.xmake/
+.xmake/
 
 # Editor files
 *.o
