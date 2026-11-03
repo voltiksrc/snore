@@ -1,0 +1,20 @@
+{
+    cmdlines = {
+        "xmake lua /nix/store/0dm8y377nsh4bazg6jigds7f7z29v9w9-xmake-3.0.8/share/xmake/modules/private/utils/statistics.lua",
+        "xmake lua /nix/store/0dm8y377nsh4bazg6jigds7f7z29v9w9-xmake-3.0.8/share/xmake/actions/build/cleaner.lua",
+        "xmake run snore -h",
+        "xmake ",
+        "xmake run snore --help",
+        "xmake ",
+        "xmake run snore -h",
+        "xmake ",
+        "xmake run snore --help",
+        "xmake f -m release",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake ",
+        "xmake project -k compile_commands"
+    }
+}
