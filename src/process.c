@@ -19,9 +19,9 @@ int run_command(const char *program, char *const args[]) {
         perror("fork");
         return 1;
     } else if (pid == 0) {
-        execvp(program, args);
+        execv(program, args);
 
-        perror("execvp");
+        perror("execv");
         _exit(127);
     }
 
