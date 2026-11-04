@@ -11,7 +11,15 @@ snore -r    # Reboot
 snore -h    # Help
 ```
 
-## Building
+## Install
+
+Run the installer.sh script:
+
+```sh
+./installer.sh
+```
+
+## Manually Building
 
 Requires [Xmake](https://xmake.io).
 
@@ -20,9 +28,15 @@ xmake
 xmake run snore --help
 ```
 
+Install:
+
+```sh
+sudo install -Dm755 build/linux/x86_64/release/snore /usr/local/bin/snore
+```
+
 ## Status
 
-Still in development. Power operations are not yet fully implemented.
+Still in development, suspend command is buggy.
 
 ## License
 
